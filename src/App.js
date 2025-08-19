@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
-
-const API_URL = "https://backend-magenta-1.onrender.com/api/contacts/";
+import { fetchContacts } from './api';
 
 function App() {
   const [contacts, setContacts] = useState([]);
 
-  const fetchContacts = async () => {
+  const loadContacts = async () => {
     try {
-      const res = await axios.get(API_URL);
-      setContacts(res.data);
+      const data = await fetchContacts();
+      setContacts(data);
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    fetchContacts();
+    loadContacts();
   }, []);
 
   return (
     <div style={{ padding: '20px' }}>
       <h1>Contact Form</h1>
-      <ContactForm onSuccess={fetchContacts} />
+      <ContactForm onSuccess={loadContacts} />
       <h2>Contacts</h2>
       <ContactList contacts={contacts} />
     </div>
