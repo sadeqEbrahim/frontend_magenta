@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
-const API_URL = "https://backend-magenta-1.onrender.com/api/contacts/";
+import { createContact } from '../api';
 
 function ContactForm({ onSuccess }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -13,12 +11,11 @@ function ContactForm({ onSuccess }) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post(API_URL, formData);
+      await createContact(formData);
       alert("Contact saved!");
       setFormData({ name: '', email: '', message: '' });
-      onSuccess(); // Refresh the contact list
+      onSuccess();
     } catch (err) {
-      console.error("Axios error:", err.response ? err.response.data : err.message);
       alert("Failed to save contact");
     }
   };
