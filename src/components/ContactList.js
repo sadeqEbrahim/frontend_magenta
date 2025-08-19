@@ -1,25 +1,15 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from 'react';
 
-export default function ContactList() {
-  const [contacts, setContacts] = useState([]);
-
-  useEffect(() => {
-    axios.get("https://backend-magenta-1.onrender.com/api/contacts/")
-      .then(res => setContacts(res.data))
-      .catch(err => console.error(err));
-  }, []);
-
+function ContactList({ contacts }) {
   return (
-    <div>
-      <h2>Contacts</h2>
-      <ul>
-        {contacts.map(contact => (
-          <li key={contact.id}>
-            {contact.name} - {contact.email} - {contact.phone}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {contacts.map(contact => (
+        <li key={contact.id}>
+          <strong>{contact.name}</strong> ({contact.email}): {contact.message}
+        </li>
+      ))}
+    </ul>
   );
 }
+
+export default ContactList;
