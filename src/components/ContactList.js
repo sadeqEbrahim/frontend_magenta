@@ -5,7 +5,7 @@ export default function ContactList() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    axios.get("https://your-backend.onrender.com/api/contacts/")
+    axios.get(""https://backend-magenta-1.onrender.com/api/contacts/")
       .then(res => setContacts(res.data))
       .catch(err => console.error(err));
   }, []);
