@@ -10,7 +10,7 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://your-backend.onrender.com/api/contacts/", formData);
+      await axios.post("https://backend-magenta-1.onrender.com/api/contacts/", formData);
       alert("Contact saved!");
       setFormData({ name: "", email: "", phone: "" });
     } catch (error) {
